@@ -33,6 +33,21 @@ namespace MyWork.GabrielCoimbra.Model
 
             Guid accountId = this.ServiceClient.Create(conta);
             return accountId;
+        }   
+       // public  Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string primaryContact)
+        public  Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp)
+        {
+            Entity conta = new Entity(this.LogicalName);
+            conta["name"] = accountName;
+            conta["telephone1"] = telephone;
+            conta["fax"] = fax;
+            conta["gbr_num_total_opp"] = numTotalOpp;
+            conta["gbr_tipo_relacao"] = new OptionSetValue(tipoRelacao);
+            conta["gbr_valor_total_opp"] = new Money(valorTotalOpp);
+           // conta["primarycontactid"] = new EntityReference("contact", new Guid(primaryContact));
+
+            Guid accountId = this.ServiceClient.Create(conta);
+            return accountId;
         }
 
         public bool Update(Guid accountId, string thelephone1)

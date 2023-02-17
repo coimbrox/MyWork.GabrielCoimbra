@@ -4,6 +4,7 @@ using MyWork.GabrielCoimbra.Controller;
 using MyWork.GabrielCoimbra.Model;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,12 +20,45 @@ namespace MyWork.GabrielCoimbra
 
             ContaController contaController = new ContaController(serviceClient);
 
-            Console.WriteLine("O que você deseja fazer?");
-                RetrieveMethods(contaController);
+            // Console.WriteLine("O que você deseja fazer?");
+            //     RetrieveMethods(contaController);
+            // Console.ReadKey();
+
+            CreateAccountDynamic(contaController);
+
+        }
+
+        private static void CreateAccountDynamic(ContaController contaController)
+        {
+            try
+            {
+                Console.Write("Digite o nome que deseja para Sua Conta: ");
+                string accountName = Console.ReadLine();
+                Console.Write("Digite o telefone que deseja para Sua Conta: ");
+                string telephone = Console.ReadLine();
+                Console.Write("Digite o fax que deseja para Sua Conta: ");
+                string fax = Console.ReadLine();
+                Console.Write("Digite o número total de oportunidades: ");
+                int numTotalOpp = int.Parse(Console.ReadLine());
+                Console.Write("Escolha o tipo de Relação (1 - Cliente 2 - Fornecedor 3 - Revenda): ");
+                int tipoRelacao = int.Parse(Console.ReadLine());
+                Console.Write("Digite o valor total de oportunidades: ");
+                decimal valorTotalOpp = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
+                // Console.Write("Digite o Contato Primário:  ");
+                //  string primaryContact = Console.ReadLine();
+
+                //   Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, primaryContact);
+                Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp);
+
+                Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=account&id={accountId}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
             Console.ReadKey();
-
-
-
         }
 
         private static void RetrieveMethods(ContaController contaController)
@@ -97,6 +131,9 @@ namespace MyWork.GabrielCoimbra
 
 
         }
+
+
+ 
 
         private static void MakeCreateUpdate(ContaController contaController)
         {

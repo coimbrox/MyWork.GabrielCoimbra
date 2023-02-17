@@ -57,10 +57,11 @@ namespace MyWork.GabrielCoimbra.Model
             return accountId;
         }
 
-        public Guid CreateContactDynamic(string fullName, string cpf, string cargo)
+        public Guid CreateContactDynamic(string firstName, string lastName, string cpf, string cargo)
         {
             Entity contato = new Entity(this.LogicalNameContact);
-            contato["fullname"] = fullName;
+            contato["firstname"] = firstName;
+            contato["lastname"] = lastName;
             contato["gbr_cpf"] = cpf;
             contato["jobtitle"] = cargo;
 

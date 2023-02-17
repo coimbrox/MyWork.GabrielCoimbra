@@ -32,9 +32,9 @@ namespace MyWork.GabrielCoimbra.Controller
         }
 
 
-        public Guid CreateContactDynamic(string fullName, string cpf, string cargo)
+        public Guid CreateContactDynamic(string firstName, string lastName, string cpf, string cargo)
         {
-            return Conta.CreateContactDynamic( fullName, cpf, cargo);
+            return Conta.CreateContactDynamic(firstName,lastName, cpf, cargo);
         }
 
         public bool Update(Guid accountId, string telephone1)

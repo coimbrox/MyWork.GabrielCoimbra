@@ -24,7 +24,7 @@ namespace MyWork.GabrielCoimbra
             //     RetrieveMethods(contaController);
             // Console.ReadKey();
 
-            // CreateAccountDynamic(contaController);
+          //  CreateAccountDynamic(contaController);
 
 
             CreateContact(contaController);
@@ -35,14 +35,16 @@ namespace MyWork.GabrielCoimbra
         {
             try
             {
-                Console.Write("Digite o nome que deseja para seu Contato: ");
-                string contactName = Console.ReadLine();
+                Console.Write("Digite o primeiro nome que deseja para seu Contato: ");
+                string firstName = Console.ReadLine();
+                Console.Write("Digite o sobrenome que deseja para seu Contato: ");
+                string lastName = Console.ReadLine();
                 Console.Write("Digite o número do CPF do Contato: ");
                 string cpf = Console.ReadLine();
                 Console.Write("Digite o Cargo Contato: ");
                 string cargo = Console.ReadLine();
 
-                Guid contactId = contaController.CreateContactDynamic(contactName, cpf, cargo);
+                Guid contactId = contaController.CreateContactDynamic(firstName,lastName, cpf, cargo);
 
                 Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=contact&id={contactId}");
             }

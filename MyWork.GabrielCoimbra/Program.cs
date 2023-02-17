@@ -8,6 +8,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MyWork.GabrielCoimbra
 {
@@ -89,13 +90,30 @@ namespace MyWork.GabrielCoimbra
                 if(contaExiste != null)
                 {
                     Console.WriteLine("Conta já existente no sistema");
-
+                   
                 }
                 else
                 {
                     Guid accountId = contaController.CreateDynamic(accountName, cnpj, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, createdBy);
 
                     Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=account&id={accountId}");
+
+                    Console.Write("Você deseja criar um contato para essa conta? ( S / N)");
+                    var resposta = Console.ReadLine();
+                   
+                    if(resposta == "S")
+                    {
+                        Console.WriteLine("ta no sim");
+                    //    CreateContact(contatoController);
+                    } else
+                    {
+                        if (resposta == "N")
+                        {
+                            Environment.Exit(0);
+                        }
+                    }
+
+
                 }
 
 

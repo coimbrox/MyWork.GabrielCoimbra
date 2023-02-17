@@ -65,8 +65,6 @@ namespace MyWork.GabrielCoimbra.Model
             return accounts.Entities.FirstOrDefault();
         }
 
-
-
         public bool Update(Guid accountId, string thelephone1)
         {
             try

@@ -85,6 +85,15 @@ namespace MyWork.GabrielCoimbra.Model
                     select a).ToList().FirstOrDefault();
         }
 
+        public EntityCollection GetAccountByLike(string like)
+        {
+            QueryExpression queryExpression = new QueryExpression(this.LogicalName);
+            queryExpression.ColumnSet.AddColumns("name");
+            queryExpression.Criteria.AddCondition("name", ConditionOperator.BeginsWith, like);
+            return this.ServiceClient.RetrieveMultiple(queryExpression);
+        }
+
+
         private Entity RetriveOneAccount(QueryExpression queryAccount)
         {
 

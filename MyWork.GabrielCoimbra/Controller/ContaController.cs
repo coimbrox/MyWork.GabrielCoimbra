@@ -41,6 +41,11 @@ namespace MyWork.GabrielCoimbra.Controller
             return Conta.GetAccountByName(name);
         }
 
+        public EntityCollection GetAccountByLike(string like)
+        {
+            return Conta.GetAccountByLike(like);
+        }
+
         public Entity GetAccountByContactName(string name, string[] columns)
         {
             return Conta.GetAccountByContactName(name, columns);

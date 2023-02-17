@@ -23,6 +23,7 @@ namespace MyWork.GabrielCoimbra
             Console.WriteLine("1 - Buscar dados de uma conta pelo id");
             Console.WriteLine("2 - Buscar uma conta por nome");
             Console.WriteLine("3 - Buscar uma conta por nome de contato");
+            Console.WriteLine("4 - Buscar diversas contas");
 
             var answer = Console.ReadLine();
 
@@ -50,6 +51,20 @@ namespace MyWork.GabrielCoimbra
                         var name = Console.ReadLine();
                         Entity account = contaController.GetAccountByContactName(name, new string[] { "name" });
                         ShowAccountName(account);
+                    } else
+
+                    {
+                        if (answer == "4")
+                        {
+                            Console.WriteLine("A conta que você pesquisa, começa com?");
+                            var telephone = Console.ReadLine();
+                            EntityCollection accounts = contaController.GetAccountByLike(telephone);
+
+                            foreach (Entity account in accounts.Entities)
+                            {
+                                Console.WriteLine(account["name"].ToString());
+                            }
+                        }
                     }
                 }
 

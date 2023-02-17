@@ -15,12 +15,10 @@ namespace MyWork.GabrielCoimbra.Model
     {
         public CrmServiceClient ServiceClient { get; set; }
         public string LogicalName { get; set; }
-        public string LogicalNameContact { get; set; }
         public Conta(CrmServiceClient crmServiceClient)
         {
             this.ServiceClient = crmServiceClient;
             this.LogicalName = "account";
-            this.LogicalNameContact = "contact";
         }
         public  Guid Create()
         {
@@ -57,17 +55,17 @@ namespace MyWork.GabrielCoimbra.Model
             return accountId;
         }
 
-        public Guid CreateContactDynamic(string firstName, string lastName, string cpf, string cargo)
+        public Entity GetAccountByCNPJ(string accountCNPJ)
         {
-            Entity contato = new Entity(this.LogicalNameContact);
-            contato["firstname"] = firstName;
-            contato["lastname"] = lastName;
-            contato["gbr_cpf"] = cpf;
-            contato["jobtitle"] = cargo;
+            QueryExpression busca = new QueryExpression(LogicalName);
+            busca.ColumnSet.AddColumn("gbr_cnpj");
+            busca.Criteria.AddCondition("gbr_cnpj", ConditionOperator.Equal, accountCNPJ);
+            EntityCollection accounts = ServiceClient.RetrieveMultiple(busca);
 
-            Guid contactId = this.ServiceClient.Create(contato);
-            return contactId;
+            return accounts.Entities.FirstOrDefault();
         }
+
+
 
         public bool Update(Guid accountId, string thelephone1)
         {
@@ -188,5 +186,7 @@ namespace MyWork.GabrielCoimbra.Model
 
             return null;
         }
+
+       
     }
 }

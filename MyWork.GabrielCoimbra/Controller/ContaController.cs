@@ -30,12 +30,7 @@ namespace MyWork.GabrielCoimbra.Controller
         {
             return Conta.CreateDynamic( accountName, cnpj, telephone,  fax,  numTotalOpp,  tipoRelacao,  valorTotalOpp, createdBy);
         }
-
-
-        public Guid CreateContactDynamic(string firstName, string lastName, string cpf, string cargo)
-        {
-            return Conta.CreateContactDynamic(firstName,lastName, cpf, cargo);
-        }
+              
 
         public bool Update(Guid accountId, string telephone1)
         {
@@ -46,6 +41,11 @@ namespace MyWork.GabrielCoimbra.Controller
         public Entity GetAccountById(Guid id)
         {
             return Conta.GetAccountById(id);
+        }
+
+        public Entity GetAccountByCNPJ(string cnpj)
+        {
+            return Conta.GetAccountByCNPJ(cnpj);
         }
 
         public Entity GetAccountByName(string name)
@@ -66,5 +66,11 @@ namespace MyWork.GabrielCoimbra.Controller
         {
             return Conta.GetAccountByContactName(name, columns);
         }
+
+
+
+
+
+
     }
 }

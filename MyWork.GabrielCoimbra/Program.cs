@@ -19,19 +19,24 @@ namespace MyWork.GabrielCoimbra
             CrmServiceClient serviceClient = Singleton.GetService();
 
             ContaController contaController = new ContaController(serviceClient);
+            ContatoController contatoController = new ContatoController(serviceClient);
+
 
             // Console.WriteLine("O que você deseja fazer?");
             //     RetrieveMethods(contaController);
             // Console.ReadKey();
 
-          //  CreateAccountDynamic(contaController);
+
+             CreateAccountDynamic(contaController);
+
+         
 
 
-            CreateContact(contaController);
+            //CreateContact(contatoController);
 
         }
 
-        private static void CreateContact(ContaController contaController)
+        private static void CreateContact(ContatoController contatoController)
         {
             try
             {
@@ -44,7 +49,7 @@ namespace MyWork.GabrielCoimbra
                 Console.Write("Digite o Cargo Contato: ");
                 string cargo = Console.ReadLine();
 
-                Guid contactId = contaController.CreateContactDynamic(firstName,lastName, cpf, cargo);
+                Guid contactId = contatoController.CreateContactDynamic(firstName, lastName, cpf, cargo);
 
                 Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=contact&id={contactId}");
             }
@@ -79,10 +84,26 @@ namespace MyWork.GabrielCoimbra
                 Console.Write("Criado por:  ");
                 // string primaryContact = Console.ReadLine();
                  string createdBy = Console.ReadLine();
-                //  Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, primaryContact);
-                Guid accountId = contaController.CreateDynamic(accountName, cnpj, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, createdBy);
 
-                Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=account&id={accountId}");
+               Entity contaExiste = contaController.GetAccountByCNPJ(cnpj);
+                if(contaExiste != null)
+                {
+                    Console.WriteLine("Conta já existente no sistema");
+
+                }
+                else
+                {
+                    Guid accountId = contaController.CreateDynamic(accountName, cnpj, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, createdBy);
+
+                    Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=account&id={accountId}");
+                }
+
+
+                        
+
+
+                //  Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, primaryContact);
+                
             }
             catch (Exception ex)
             {

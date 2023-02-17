@@ -26,9 +26,9 @@ namespace MyWork.GabrielCoimbra.Controller
         }
 
        // public Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string primaryContact)
-       public Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp )
+       public Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string createdBy)
         {
-            return Conta.CreateDynamic( accountName,  telephone,  fax,  numTotalOpp,  tipoRelacao,  valorTotalOpp);
+            return Conta.CreateDynamic( accountName,  telephone,  fax,  numTotalOpp,  tipoRelacao,  valorTotalOpp, createdBy);
         }
 
         public bool Update(Guid accountId, string telephone1)

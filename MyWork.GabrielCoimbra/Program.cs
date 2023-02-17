@@ -28,7 +28,7 @@ namespace MyWork.GabrielCoimbra
             // Console.ReadKey();
 
 
-              CreateAccountDynamic(contaController);
+              CreateAccountDynamic(contaController, contatoController);
 
          
           
@@ -40,7 +40,7 @@ namespace MyWork.GabrielCoimbra
 
         }
 
-        private static void CreateContact(ContatoController contatoController)
+        public static void CreateContact(ContatoController contatoController)
         {
             try
             {
@@ -82,7 +82,7 @@ namespace MyWork.GabrielCoimbra
             Console.ReadKey();
         }
 
-        private static void CreateAccountDynamic(ContaController contaController)
+        private static void CreateAccountDynamic(ContaController contaController, ContatoController contatoController)
         {
             try
             {
@@ -122,17 +122,17 @@ namespace MyWork.GabrielCoimbra
                     Console.Write("Você deseja criar um contato para essa conta? ( S / N)");
                     var resposta = Console.ReadLine();
                    
-                    if(resposta.ToLower() == "S")
+                    if(resposta.ToLower() == "s")
                     {
                         
                         Console.WriteLine("ta no sim");
 
-
+                        CreateContact(contatoController);
 
 
                     } else
                     {
-                        if (resposta.ToLower() == "N")
+                        if (resposta.ToLower() == "n")
                         {
                             
                         }

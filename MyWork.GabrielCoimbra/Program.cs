@@ -22,17 +22,19 @@ namespace MyWork.GabrielCoimbra
             ContaController contaController = new ContaController(serviceClient);
             ContatoController contatoController = new ContatoController(serviceClient);
 
-
             // Console.WriteLine("O que você deseja fazer?");
             //     RetrieveMethods(contaController);
             // Console.ReadKey();
 
 
-             CreateAccountDynamic(contaController);
+              CreateAccountDynamic(contaController);
 
          
+          
+            //   CreateContact(contatoController);
+            
 
-
+            
             //CreateContact(contatoController);
 
         }
@@ -117,16 +119,19 @@ namespace MyWork.GabrielCoimbra
                     Console.Write("Você deseja criar um contato para essa conta? ( S / N)");
                     var resposta = Console.ReadLine();
                    
-                    if(resposta == "S")
+                    if(resposta.ToLower() == "S")
                     {
-
+                        
                         Console.WriteLine("ta no sim");
-                    //    CreateContact(contatoController);
+
+
+
+
                     } else
                     {
-                        if (resposta == "N")
+                        if (resposta.ToLower() == "N")
                         {
-                            Environment.Exit(0);
+
                         }
                     }
 

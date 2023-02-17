@@ -15,10 +15,12 @@ namespace MyWork.GabrielCoimbra.Model
     {
         public CrmServiceClient ServiceClient { get; set; }
         public string LogicalName { get; set; }
+        public string LogicalNameContact { get; set; }
         public Conta(CrmServiceClient crmServiceClient)
         {
             this.ServiceClient = crmServiceClient;
             this.LogicalName = "account";
+            this.LogicalNameContact = "contact";
         }
         public  Guid Create()
         {
@@ -35,13 +37,15 @@ namespace MyWork.GabrielCoimbra.Model
             return accountId;
         }   
       //  public  Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string primaryContact)
-        public  Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string createdBy)
+        public  Guid CreateDynamic(string accountName,string cnpj, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string createdBy)
         {
             Entity conta = new Entity(this.LogicalName);
-// primaryContact = "4f31ec64-4bae-ed11-83fe-00224837d145";
+            // primaryContact = "4f31ec64-4bae-ed11-83fe-00224837d145";
             conta["name"] = accountName;
+            conta["gbr_cnpj"] = cnpj;
             conta["telephone1"] = telephone;
             conta["fax"] = fax;
+            conta["gbr_num_total_opp"] = numTotalOpp;
             conta["gbr_num_total_opp"] = numTotalOpp;
             conta["gbr_tipo_relacao"] = new OptionSetValue(tipoRelacao);
             conta["gbr_valor_total_opp"] = new Money(valorTotalOpp);
@@ -51,6 +55,17 @@ namespace MyWork.GabrielCoimbra.Model
             
             Guid accountId = this.ServiceClient.Create(conta);
             return accountId;
+        }
+
+        public Guid CreateContactDynamic(string fullName, string cpf, string cargo)
+        {
+            Entity contato = new Entity(this.LogicalNameContact);
+            contato["fullname"] = fullName;
+            contato["gbr_cpf"] = cpf;
+            contato["jobtitle"] = cargo;
+
+            Guid contactId = this.ServiceClient.Create(contato);
+            return contactId;
         }
 
         public bool Update(Guid accountId, string thelephone1)

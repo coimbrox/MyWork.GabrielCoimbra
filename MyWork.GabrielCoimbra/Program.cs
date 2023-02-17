@@ -24,8 +24,35 @@ namespace MyWork.GabrielCoimbra
             //     RetrieveMethods(contaController);
             // Console.ReadKey();
 
-            CreateAccountDynamic(contaController);
+            // CreateAccountDynamic(contaController);
 
+
+            CreateContact(contaController);
+
+        }
+
+        private static void CreateContact(ContaController contaController)
+        {
+            try
+            {
+                Console.Write("Digite o nome que deseja para seu Contato: ");
+                string contactName = Console.ReadLine();
+                Console.Write("Digite o número do CPF do Contato: ");
+                string cpf = Console.ReadLine();
+                Console.Write("Digite o Cargo Contato: ");
+                string cargo = Console.ReadLine();
+
+                Guid contactId = contaController.CreateContactDynamic(contactName, cpf, cargo);
+
+                Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=contact&id={contactId}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+
+
+            Console.ReadKey();
         }
 
         private static void CreateAccountDynamic(ContaController contaController)
@@ -34,6 +61,8 @@ namespace MyWork.GabrielCoimbra
             {
                 Console.Write("Digite o nome que deseja para Sua Conta: ");
                 string accountName = Console.ReadLine();
+                Console.Write("Digite o CNPJ que deseja para Sua Conta: ");
+                string cnpj = Console.ReadLine();
                 Console.Write("Digite o telefone que deseja para Sua Conta: ");
                 string telephone = Console.ReadLine();
                 Console.Write("Digite o fax que deseja para Sua Conta: ");
@@ -49,7 +78,7 @@ namespace MyWork.GabrielCoimbra
                 // string primaryContact = Console.ReadLine();
                  string createdBy = Console.ReadLine();
                 //  Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, primaryContact);
-                Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, createdBy);
+                Guid accountId = contaController.CreateDynamic(accountName, cnpj, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, createdBy);
 
                 Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=account&id={accountId}");
             }

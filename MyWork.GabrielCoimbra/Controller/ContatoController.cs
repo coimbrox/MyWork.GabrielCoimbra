@@ -1,4 +1,5 @@
-﻿using Microsoft.Xrm.Tooling.Connector;
+﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Tooling.Connector;
 using MyWork.GabrielCoimbra.Model;
 using System;
 using System.Collections.Generic;
@@ -24,5 +25,9 @@ namespace MyWork.GabrielCoimbra.Controller
             return Contato.CreateContactDynamic(firstName, lastName, cpf, cargo);
         }
 
+        public Entity GetContactByCPF(string cpf)
+        {
+            return Contato.GetContactByCPF(cpf);
+        }
     }
 }

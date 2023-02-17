@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xrm.Sdk;
+using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Tooling.Connector;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,16 @@ namespace MyWork.GabrielCoimbra.Model
 
             Guid contactId = this.ServiceClient.Create(contato);
             return contactId;
+        }
+
+        public Entity GetContactByCPF(string contactCPF)
+        {
+            QueryExpression busca = new QueryExpression(LogicalNameContact);
+            busca.ColumnSet.AddColumn("gbr_cpf");
+            busca.Criteria.AddCondition("gbr_cpf", ConditionOperator.Equal, LogicalNameContact);
+            EntityCollection contact = ServiceClient.RetrieveMultiple(busca);
+
+            return contact.Entities.FirstOrDefault();
         }
     }
 }

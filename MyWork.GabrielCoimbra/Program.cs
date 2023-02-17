@@ -50,9 +50,25 @@ namespace MyWork.GabrielCoimbra
                 Console.Write("Digite o Cargo Contato: ");
                 string cargo = Console.ReadLine();
 
-                Guid contactId = contatoController.CreateContactDynamic(firstName, lastName, cpf, cargo);
 
-                Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=contact&id={contactId}");
+
+                Entity contatoExiste = contatoController.GetContactByCPF(cpf);
+                if (contatoExiste != null)
+                {
+                    Console.WriteLine("Contato já existente no sistema");
+
+                }
+                else
+                {
+                    Guid contactId = contatoController.CreateContactDynamic(firstName, lastName, cpf, cargo);
+
+                    Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=contact&id={contactId}");
+                }
+                    
+
+
+
+                   
             }
             catch (Exception ex)
             {
@@ -103,6 +119,7 @@ namespace MyWork.GabrielCoimbra
                    
                     if(resposta == "S")
                     {
+
                         Console.WriteLine("ta no sim");
                     //    CreateContact(contatoController);
                     } else

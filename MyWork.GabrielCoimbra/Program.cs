@@ -20,6 +20,15 @@ namespace MyWork.GabrielCoimbra
             ContaController contaController = new ContaController(serviceClient);
 
             Console.WriteLine("O que você deseja fazer?");
+                RetrieveMethods(contaController);
+            Console.ReadKey();
+
+
+
+        }
+
+        private static void RetrieveMethods(ContaController contaController)
+        {
             Console.WriteLine("1 - Buscar dados de uma conta pelo id");
             Console.WriteLine("2 - Buscar uma conta por nome");
             Console.WriteLine("3 - Buscar uma conta por nome de contato");
@@ -33,7 +42,7 @@ namespace MyWork.GabrielCoimbra
                 var accountId = Console.ReadLine();
                 Entity account = contaController.GetAccountById(new Guid(accountId));
                 Console.WriteLine($"A conta recuperada se chama {account["name"].ToString()} ");
-                                             
+
             }
             else
             {
@@ -43,7 +52,8 @@ namespace MyWork.GabrielCoimbra
                     var name = Console.ReadLine();
                     Entity account = contaController.GetAccountByName(name);
                     Console.WriteLine($"O telefone conta recuperada é {account["telephone1"].ToString()} ");
-                } else
+                }
+                else
                 {
                     if (answer == "3")
                     {
@@ -51,7 +61,8 @@ namespace MyWork.GabrielCoimbra
                         var name = Console.ReadLine();
                         Entity account = contaController.GetAccountByContactName(name, new string[] { "name" });
                         ShowAccountName(account);
-                    } else
+                    }
+                    else
 
                     {
                         if (answer == "4")
@@ -68,12 +79,8 @@ namespace MyWork.GabrielCoimbra
                     }
                 }
 
-               
+
             }
-            Console.ReadKey();
-
-
-
         }
 
         private static void CreateUpdate(ContaController contaController)

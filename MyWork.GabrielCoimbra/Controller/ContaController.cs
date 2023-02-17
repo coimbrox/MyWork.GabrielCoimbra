@@ -46,6 +46,10 @@ namespace MyWork.GabrielCoimbra.Controller
             return Conta.GetAccountByLike(like);
         }
 
+        public void UpsertMultipleRequest(EntityCollection entityCollection)
+        {
+            Conta.UpsertMultipleRequest(entityCollection);
+        }
         public Entity GetAccountByContactName(string name, string[] columns)
         {
             return Conta.GetAccountByContactName(name, columns);

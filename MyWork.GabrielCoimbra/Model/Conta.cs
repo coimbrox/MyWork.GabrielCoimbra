@@ -1,5 +1,6 @@
 ﻿using Microsoft.Xrm.Sdk;
 using Microsoft.Xrm.Sdk.Client;
+using Microsoft.Xrm.Sdk.Messages;
 using Microsoft.Xrm.Sdk.Query;
 using Microsoft.Xrm.Tooling.Connector;
 using System;
@@ -93,6 +94,52 @@ namespace MyWork.GabrielCoimbra.Model
             return this.ServiceClient.RetrieveMultiple(queryExpression);
         }
 
+        //lotes de creates e updates e enviar para o sistema
+        public void UpsertMultipleRequest(EntityCollection entityCollection)
+        {
+            OrganizationRequestCollection requestColletction = new OrganizationRequestCollection();
+
+            foreach (Entity entity in entityCollection.Entities)
+            {
+                AddUpsertRequest(requestColletction, entity);
+            }
+
+            ExecuteMultipleResponse executeMultipleResponse = AddExecuteMultiple(requestColletction);
+
+            foreach (var executeResponse in executeMultipleResponse.Responses)
+            {
+                if (executeResponse.Fault != null)
+                {
+                    Console.WriteLine(executeResponse.Fault.ToString());
+                }
+            }
+        }
+
+        private ExecuteMultipleResponse AddExecuteMultiple(OrganizationRequestCollection requestColletction)
+        {
+            ExecuteMultipleRequest executeMultipleRequest = new ExecuteMultipleRequest()
+            {
+                Requests = requestColletction,
+                Settings = new ExecuteMultipleSettings()
+                {
+                    ContinueOnError = true,
+                    ReturnResponses = true,
+                }
+            };
+
+            ExecuteMultipleResponse executeMultipleResponse = (ExecuteMultipleResponse)this.ServiceClient.Execute(executeMultipleRequest);
+            return executeMultipleResponse;
+        }
+
+        private static void AddUpsertRequest(OrganizationRequestCollection requestColletction, Entity entity)
+        {
+            UpsertRequest upsertRequest = new UpsertRequest()
+            {
+                Target = entity
+            };
+
+            requestColletction.Add(upsertRequest);
+        }
 
         private Entity RetriveOneAccount(QueryExpression queryAccount)
         {

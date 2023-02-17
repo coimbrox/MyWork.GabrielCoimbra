@@ -125,7 +125,6 @@ namespace MyWork.GabrielCoimbra
                     if(resposta.ToLower() == "s")
                     {
                         
-                        Console.WriteLine("ta no sim");
 
                         CreateContact(contatoController);
 

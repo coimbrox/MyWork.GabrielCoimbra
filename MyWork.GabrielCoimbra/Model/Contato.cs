@@ -38,7 +38,7 @@ namespace MyWork.GabrielCoimbra.Model
         {
             QueryExpression busca = new QueryExpression(LogicalNameContact);
             busca.ColumnSet.AddColumn("gbr_cpf");
-            busca.Criteria.AddCondition("gbr_cpf", ConditionOperator.Equal, LogicalNameContact);
+            busca.Criteria.AddCondition("gbr_cpf", ConditionOperator.Equal, contactCPF);
             EntityCollection contact = ServiceClient.RetrieveMultiple(busca);
 
             return contact.Entities.FirstOrDefault();

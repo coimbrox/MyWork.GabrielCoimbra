@@ -3,6 +3,7 @@ using Microsoft.Xrm.Tooling.Connector;
 using MyWork.GabrielCoimbra.Controller;
 using MyWork.GabrielCoimbra.Model;
 using System;
+using System.Activities.Presentation.Debug;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -99,10 +100,12 @@ namespace MyWork.GabrielCoimbra
                 int tipoRelacao = int.Parse(Console.ReadLine());
                 Console.Write("Digite o valor total de oportunidades: ");
                 decimal valorTotalOpp = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-               //Console.Write("Escolha a Moeda(Real - US Dollar - Euro):  ");
+                Console.Write("Digite a Conta Primária:  ");
+                Guid primarycontact = Guid.Parse(Console.ReadLine());
+
                 Console.Write("Criado por:  ");
-                // string primaryContact = Console.ReadLine();
-                 string createdBy = Console.ReadLine();
+
+                string createdBy = Console.ReadLine();
 
                Entity contaExiste = contaController.GetAccountByCNPJ(cnpj);
                 if(contaExiste != null)
@@ -112,7 +115,7 @@ namespace MyWork.GabrielCoimbra
                 }
                 else
                 {
-                    Guid accountId = contaController.CreateDynamic(accountName, cnpj, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, createdBy);
+                    Guid accountId = contaController.CreateDynamic(accountName, cnpj, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, createdBy, primarycontact);
 
                     Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=account&id={accountId}");
 
@@ -131,7 +134,7 @@ namespace MyWork.GabrielCoimbra
                     {
                         if (resposta.ToLower() == "N")
                         {
-
+                            
                         }
                     }
 

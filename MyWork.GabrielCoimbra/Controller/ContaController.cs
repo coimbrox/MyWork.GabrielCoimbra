@@ -25,10 +25,10 @@ namespace MyWork.GabrielCoimbra.Controller
             return Conta.Create();
         }
 
-       // public Guid CreateDynamic(string accountName, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string primaryContact)
-       public Guid CreateDynamic(string accountName, string cnpj, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string createdBy)
+        public Guid CreateDynamic(string accountName, string telephone, string cnpj, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string createdBy, Guid primarycontact)
+      //  public Guid CreateDynamic(string accountName, string cnpj, string telephone, string fax, int numTotalOpp, int tipoRelacao, decimal valorTotalOpp, string createdBy)
         {
-            return Conta.CreateDynamic( accountName, cnpj, telephone,  fax,  numTotalOpp,  tipoRelacao,  valorTotalOpp, createdBy);
+            return Conta.CreateDynamic( accountName, cnpj, telephone,  fax,  numTotalOpp,  tipoRelacao,  valorTotalOpp, createdBy, primarycontact);
         }
               
 

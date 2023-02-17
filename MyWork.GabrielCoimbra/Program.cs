@@ -44,10 +44,9 @@ namespace MyWork.GabrielCoimbra
                 int tipoRelacao = int.Parse(Console.ReadLine());
                 Console.Write("Digite o valor total de oportunidades: ");
                 decimal valorTotalOpp = decimal.Parse(Console.ReadLine(), CultureInfo.InvariantCulture);
-                // Console.Write("Digite o Contato Primário:  ");
-                //  string primaryContact = Console.ReadLine();
-
-                //   Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, primaryContact);
+               // Console.Write("Digite o Contato Primário:  ");
+               // string primaryContact = Console.ReadLine();
+              //  Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp, primaryContact);
                 Guid accountId = contaController.CreateDynamic(accountName, telephone, fax, numTotalOpp, tipoRelacao, valorTotalOpp);
 
                 Console.WriteLine($"https://gabrielcoimbra2023.crm2.dynamics.com/main.aspx?appid=4d306bb3-f4a9-ed11-9885-000d3a888f48&pagetype=entityrecord&etn=account&id={accountId}");

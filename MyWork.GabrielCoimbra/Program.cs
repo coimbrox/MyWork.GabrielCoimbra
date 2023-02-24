@@ -22,21 +22,7 @@ namespace MyWork.GabrielCoimbra
 
             ContaController contaController = new ContaController(serviceClient);
             ContatoController contatoController = new ContatoController(serviceClient);
-
-            // Console.WriteLine("O que você deseja fazer?");
-            //     RetrieveMethods(contaController);
-            // Console.ReadKey();
-
-
-              CreateAccountDynamic(contaController, contatoController);
-
-         
-          
-            //   CreateContact(contatoController);
-            
-
-            
-            //CreateContact(contatoController);
+            CreateAccountDynamic(contaController, contatoController);
 
         }
 
@@ -77,8 +63,6 @@ namespace MyWork.GabrielCoimbra
             {
                 Console.WriteLine(ex.Message);
             }
-
-
             Console.ReadKey();
         }
 
@@ -151,7 +135,6 @@ namespace MyWork.GabrielCoimbra
             {
                 Console.WriteLine(ex.Message);
             }
-
 
             Console.ReadKey();
         }

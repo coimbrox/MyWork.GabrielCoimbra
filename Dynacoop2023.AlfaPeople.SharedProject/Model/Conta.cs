@@ -199,10 +199,18 @@ namespace MyWork.GabrielCoimbra.Model
 
 
 
-      public void IncrementNumberOfOpp( Entity oppAccount)
+      public void IncrementOrDecrementNumberOfOpp( Entity oppAccount, bool? decrementOrIncrement)
         {
             int numberOfOpp = oppAccount.Contains("gbr_num_total_opp") ? (int)oppAccount["gbr_num_total_opp"] : 0;
-            numberOfOpp += 1;
+            if(Convert.ToBoolean(decrementOrIncrement))
+            {
+                numberOfOpp += 1;
+            } else
+            {
+                numberOfOpp -= 1;
+            }
+
+
             oppAccount["gbr_num_total_opp"] = numberOfOpp;
             ServiceClient.Update(oppAccount);
         }

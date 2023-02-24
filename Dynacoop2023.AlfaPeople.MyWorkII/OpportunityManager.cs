@@ -22,20 +22,21 @@ namespace Dynacoop2023.AlfaPeople.MyWorkII
             ITracingService tracingService = (ITracingService)serviceProvider.GetService(typeof(ITracingService));
             //dentro do contexto
 
-            Entity opportunity = (Entity)context.InputParameters["Target"];
+            //se for create busca no target se ñ pega na pre image
+            Entity opportunity = new Entity();
+            bool? incrementOrDecrement = null;
+            SetVariables(context, out opportunity, out incrementOrDecrement);
 
-            EntityReference accountReference = opportunity.Contains("parentaccountid") ? (EntityReference)opportunity["parentaccountid"]: null;
+            EntityReference accountReference = opportunity.Contains("parentaccountid") ? (EntityReference)opportunity["parentaccountid"] : null;
 
 
-            tracingService.Trace("Iniciou processo do Plugin");
 
 
-            if(accountReference != null)
+            if (accountReference != null)
             {
-                tracingService.Trace("Referencia encontrada");
                 ContaController contaController = new ContaController(service);
                 Entity oppAccount = contaController.GetAccountById(accountReference.Id, new string[] { "gbr_num_total_opp" });
-                contaController.IncrementNumberOfOpp(oppAccount);
+                contaController.IncrementOrDecrementNumberOfOpp(oppAccount, incrementOrDecrement);
                 tracingService.Trace("Conta Atualizada");
             }
 
@@ -43,6 +44,19 @@ namespace Dynacoop2023.AlfaPeople.MyWorkII
 
         }
 
- 
+        private static void SetVariables(IPluginExecutionContext context, out Entity opportunity, out bool? incrementOrDecrement)
+        {
+            if (context.MessageName == "Create")
+            {
+                opportunity = (Entity)context.InputParameters["Target"];
+                incrementOrDecrement = true;
+            }
+            else
+            {
+                opportunity = (Entity)context.PreEntityImages["PreImage"];
+                incrementOrDecrement = false;
+            }
+        }
+
     }
 }

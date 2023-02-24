@@ -80,9 +80,9 @@ namespace MyWork.GabrielCoimbra.Controller
 
 
 
-        public void IncrementNumberOfOpp(Entity oppAccount)
+        public void IncrementOrDecrementNumberOfOpp(Entity oppAccount, bool? incrementOrDecrement)
         {
-             Conta.IncrementNumberOfOpp(oppAccount);
+             Conta.IncrementOrDecrementNumberOfOpp(oppAccount, incrementOrDecrement);
         }
 
 
